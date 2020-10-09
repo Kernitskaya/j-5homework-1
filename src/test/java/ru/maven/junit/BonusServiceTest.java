@@ -34,9 +34,9 @@ class BonusServiceTest {
     void shouldCalculateRegisteredAndLimit() {
         BonusService bonusService = new BonusService();
 
-        long amount = 10000;
+        long amount = 5000000;
         boolean registered = true;
-        long expected = 3;
+        long expected = 500;
 
         long actual = bonusService.calculate(amount, registered);
         assertEquals(expected, actual);
@@ -46,9 +46,33 @@ class BonusServiceTest {
     void shouldCalculateNotRegisteredAndLimit() {
         BonusService bonusService = new BonusService();
 
-        long amount = 10000;
+        long amount = 5000000;
         boolean registered = false;
-        long expected = 1;
+        long expected = 500;
+
+        long actual = bonusService.calculate(amount, registered);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldCalculateRegisteredAndGreaterLimit() {
+        BonusService bonusService = new BonusService();
+
+        long amount = 5000100;
+        boolean registered = true;
+        long expected = 500;
+
+        long actual = bonusService.calculate(amount, registered);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldCalculateNotRegisteredAndGreaterLimit() {
+        BonusService bonusService = new BonusService();
+
+        long amount = 5000100;
+        boolean registered = false;
+        long expected = 500;
 
         long actual = bonusService.calculate(amount, registered);
         assertEquals(expected, actual);
